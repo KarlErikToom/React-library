@@ -19,7 +19,7 @@ function Nav() {
         <ul className="nav__links">
           <li className="nav__list">
             <a href="/" className="nav__link">
-              Home nope 
+              Home
             </a>
           </li>
           <li className="nav__list">
