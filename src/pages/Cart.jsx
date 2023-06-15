@@ -1,6 +1,6 @@
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import EmptyCart from "../assets/empty_cart.svg";
+import { Link } from "react-router-dom";
 
 function Cart({ cart, changeQuantity, removeItem }) {
   function total() {
@@ -10,7 +10,7 @@ function Cart({ cart, changeQuantity, removeItem }) {
         (item.salePrice || item.originalPrice) * item.quantity
       ).toFixed(2);
     });
-    return price
+    return price;
   }
 
   function subTotal() {}
@@ -45,7 +45,12 @@ function Cart({ cart, changeQuantity, removeItem }) {
                           <span className="cart__book--price">
                             ${(book.salePrice || book.originalPrice).toFixed(2)}
                           </span>
-                          <button className="cart__book--remove" onClick={() =>removeItem(book)}>Remove</button>
+                          <button
+                            className="cart__book--remove"
+                            onClick={() => removeItem(book)}
+                          >
+                            Remove
+                          </button>
                         </div>
                       </div>
                       <div className="cart__quantity">
@@ -71,24 +76,35 @@ function Cart({ cart, changeQuantity, removeItem }) {
                   );
                 })}
               </div>
+              {cart.length === 0 && (
+                <div className="cart__empty">
+                  <img src={EmptyCart} alt="" className="cart__empty--img" />
+                  <h2>You dont have any books in your cart</h2>
+                  <Link to="/books">
+                    <button className="btn">Browse books</button>
+                  </Link>
+                </div>
+              )}
             </div>
-            <div className="total">
-              <div className="total__item total__sub-total">
-                <span>Subtotal</span>
-                <span>${(total() * 0.9).toFixed(2)}</span>
+            {cart.length > 0 && (
+              <div className="total">
+                <div className="total__item total__sub-total">
+                  <span>Subtotal</span>
+                  <span>${(total() * 0.9).toFixed(2)}</span>
+                </div>
+                <div className="total__item total__tax">
+                  <span>Tax</span>
+                  <span>${(total() * 0.1).toFixed(2)}</span>
+                </div>
+                <div className="total__item total__price">
+                  <span>Total</span>
+                  <span>${total()}</span>
+                </div>
+                <button className="btn btn__checkout no-cursor">
+                  Proceed to checkout
+                </button>
               </div>
-              <div className="total__item total__tax">
-                <span>Tax</span>
-                <span>${(total() * 0.1).toFixed(2)}</span>
-              </div>
-              <div className="total__item total__price">
-                <span>Total</span>
-                <span>${total()}</span>
-              </div>
-              <button className="btn btn__checkout no-cursor">
-                Proceed to checkout
-              </button>
-            </div>
+            )}
           </div>
         </div>
       </main>
