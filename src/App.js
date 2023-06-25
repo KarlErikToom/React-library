@@ -64,7 +64,7 @@ function App() {
               <Bookinfo books={books} addToCart={addToCart} cart={cart} />
             }
           />
-          <Route path="/cart" element={<Cart books={books} cart={cart} changeQuantity={changeQuantity} />} />
+          <Route path="/cart" element={<Cart books={books} cart={cart} removeItem={removeItem} changeQuantity={changeQuantity} />} />
         </Routes>
         <Footer />
       </div>

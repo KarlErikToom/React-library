@@ -12,6 +12,7 @@ function Cart({ cart, changeQuantity, removeItem }) {
     });
     return price;
   }
+  
 
   function subTotal() {}
   return (
